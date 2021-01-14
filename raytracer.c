@@ -158,4 +158,5 @@ int main(int argc, char **argv)
     writeImage(image, filename);
     cleanScene(&scene);
     printf("Done\n");
+    return 0;
 }
