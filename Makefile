@@ -1,5 +1,10 @@
 CC = cc
-LIBS = "-lm"
+LIBS = -lm
+MAIN = raytracer.c
+OUT = raytracer.out
 
-raytracer.out: raytracer.c
+$(OUT): $(MAIN)
 	$(CC) $(LIBS) $? -o $@
+
+clean:
+	rm -f $(OUT)
