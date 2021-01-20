@@ -20,6 +20,16 @@
 #include "shade.h"
 #include "image.h"
 
+#define FILENAME "output.ppm"
+#define ISBINARY 1
+#define WIDTH 160
+#define HEIGHT 120
+#define FOV 45.0f
+#define RECURSION 2
+#define CONE_DIVISIONS 32
+#define CYLINDER_DIVISIONS 32
+#define SPHERE_SUBDIVISIONS 3
+
 void createScene(Scene *scene)
 {
     Object cone, cylinder, cube, sphere, plane_base, plane_right, plane_left, plane_back;
@@ -44,9 +54,9 @@ void createScene(Scene *scene)
     setMaterial(&mtl_glass,  white,  0.0f, 0.5f, 0.0f, 0.0f,  0.0f, 0.9f, 1.4f);
 
     /* create some objects, attach created materials to them */
-    createCone(     &cone,          mtl_matt4,  1.0f, 1.5f, 32);
-    createSphere(   &sphere,        mtl_matt1,  0.9f, 3);
-    createCylinder( &cylinder,      mtl_shiny2, 0.75f, 1.0f, 32);
+    createCone(     &cone,          mtl_matt4,  1.0f, 1.5f, CONE_DIVISIONS);
+    createSphere(   &sphere,        mtl_matt1,  0.9f, SPHERE_SUBDIVISIONS);
+    createCylinder( &cylinder,      mtl_shiny2, 0.75f, 1.0f, CYLINDER_DIVISIONS);
     createCube(     &cube,          mtl_glass,  1.0f);
     createPlaneXZ(  &plane_base,    mtl_shiny1, 10.0f);
     createPlaneXZ(  &plane_left,    mtl_matt1,  10.0f);
@@ -113,9 +123,7 @@ Vector trace(Ray ray, Scene scene, Light light, int recur)
 
 int main(int argc, char **argv)
 {
-    int width = 640, height = 480, recur = 2, i, j;
-    char *filename = "output.ppm";
-
+    int i, j;
     Vector lcolor, lpos, camPos, lookat;
     Light light;
     Camera cam;
@@ -136,26 +144,32 @@ int main(int argc, char **argv)
     /* setup camera */
     setVector(&camPos, 1.0f, 2.0f,  4.0f);
     setVector(&lookat, 1.0f, 0.0f, -6.0f);
-    setCamera(&cam, camPos, lookat, 45.0f, width, height);
+    setCamera(&cam, camPos, lookat, FOV, WIDTH, HEIGHT);
 
     /* setup image */
-    initImage(&image, width, height);
+    initImage(&image, WIDTH, HEIGHT);
 
-    printf("Image: %s, Size: %dx%d\n", filename, width, height);
-    printf("Initial Ray Count: %d, Triangle Count: %d, Recursion Depth: %d\n", width * height, getTriangleCount(scene), recur);
+    printf("Image: %s, Size: %dx%d, Binary: %s\n", FILENAME, WIDTH, HEIGHT, ISBINARY? "Yes": "No");
+    printf("Recursion Depth: %d, Initial Ray Count: %d, Triangle Count: %d\n", RECURSION, WIDTH * HEIGHT, getTriangleCount(scene));
     printf("Raytracing...\n");
 
     /* tracing */
-    for(j = 0; j < height; j++)
-        for(i = 0; i < width; i++)
+    for(j = 0; j < HEIGHT; j++)
+        for(i = 0; i < WIDTH; i++)
         {
             ray = generateRay(i, j, cam);
-            outcolor = vector2color(trace(ray, scene, light, recur));
+            outcolor = vector2color(trace(ray, scene, light, RECURSION));
             setPixel(&image, i, j, outcolor);
         }
 
-    printf("Done, writing image...\n");
-    writeImage(image, filename);
+    /* dumping image */
+    printf("Done\nWriting image...\n");
+    if(ISBINARY)
+        writeImageBinary(image, FILENAME);
+    else
+        writeImageAscii(image, FILENAME);
+
+    /* clean up */
     cleanScene(&scene);
     printf("Done\n");
     return 0;

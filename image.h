@@ -23,7 +23,7 @@
 #include <string.h>
 
 #define RGB 3
-#define COMMENT "Created by 'Build a Raytracer - Workshop by DDU at BITS-ATMOS Hyd 2012'"
+#define COMMENT "Build a Raytracer - DDU India at BITS-ATMOS Hyderabad 2012"
 
 typedef struct Image
 {
@@ -77,7 +77,7 @@ void setPixel(Image *img, int i, int j, Color color)
 }
 
 /* Write image in ascii format, more human readable */
-void writeImage(Image img, const char * filename)
+void writeImageAscii(Image img, const char * filename)
 {
     int i = 0, j = 0, index = 0;
 	FILE *fp;

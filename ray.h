@@ -208,6 +208,7 @@ Ray refractRay(Hit hit, float ir)
 
     refract.dir = normalize(subtract(floatVecMult(s, hit.normal), floatVecMult(i, incident)));
 
+    /* I faintly remember the following stub is possibly an alternative. Don't want to discard it */
     /*float c = dot(hit.ray.dir, hit.normal);
     float s = ir * ir * (1.0f - (c * c));
 
