@@ -1,26 +1,33 @@
 # simple-c-raytracer
-Build a Raytracer - Workshop by DDU India at BITS-ATMOS Hyderabad 2012
+This is a simplest possible raytracer written in C, intentionally brute force, with minimal usage of pointers and external libraries, for easy understanding of the basic theory. This was part of a workshop, [Build a Raytracer](https://shiben.in/?p=39), by DDU India at BITS-ATMOS Hyderabad 2012.  
+![simple-c-raytracer rendered image](https://shiben.files.wordpress.com/2015/11/35036-output.png)
 
-This is a simplest possible raytracer written in C, with minimal usage of
-pointers and external libraries, for easy understanding of the basic theory.
+# Build and Run
+make  
+./raytracer.out
 
-Compile and Build as
-# make
+# Scene Description
+Scene can be set up in `createScene()` function in `raytracer.c`.  
+The function names are self explanatory.  
 
-Run the executable
-# ./raytracer.out
+# Output Settings
+Use the following `#define`s in `raytracer.c` for output settings:  
+> #define FILENAME "output.ppm"  
+> #define ISBINARY 1  
+> #define WIDTH 160  
+> #define HEIGHT 120  
+> #define FOV 45.0f  
+> #define RECURSION 2  
+> #define CONE_DIVISIONS 32  
+> #define CYLINDER_DIVISIONS 32  
+> #define SPHERE_SUBDIVISIONS 3  
 
-Some points for performance:
-1. Image Size: for quick testing, use something like 320x240
-2. Recursion Depth: Can be kept 0 for no reflections/refractions
-3. Cone and Cylinder can use smaller resolution, default image uses 32
-4. Sphere resolution, unlike Cone and Cylinder, is power of 4
+# Performance
+1. Use a small image size (e.g. 160x120) for quicker results
+2. Recursion Depth can reduced. 0 means no reflections and refractions
+3. Use smaller number for primitive divisions (resolution)
 
-Thank you for downloading our code.
-
-Authors:
-Shiben Bhattacharjee
-Naveen Kumar
-
-Special mention of our dear friend:
-Yash Agrawal
+# Authors
+Shiben Bhattacharjee  
+Naveen Kumar  
+*Special mention of our dear friend for moral support: Yash Agrawal*
