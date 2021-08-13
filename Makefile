@@ -4,7 +4,7 @@ MAIN = raytracer.c
 OUT = raytracer.out
 
 $(OUT): $(MAIN)
-	$(CC) $(LIBS) $? -o $@
+	$(CC) $? -o $@ $(LIBS) 
 
 clean:
 	rm -f $(OUT)
