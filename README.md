@@ -1,6 +1,5 @@
 # simple-c-raytracer
 This is a simplest possible raytracer written in C, intentionally brute force, with minimal usage of pointers and external libraries, for easy understanding of the basic theory. This was part of a workshop, [Build a Raytracer](https://shiben.tech/blog/simple-easy-ray-tracer/), by DDU India at BITS-ATMOS Hyderabad 2012.  
-![https://shiben.tech/blog/simple-easy-ray-tracer/images/35036-output.png](https://shiben.tech/blog/simple-easy-ray-tracer/)
 
 # Build and Run
 make  
