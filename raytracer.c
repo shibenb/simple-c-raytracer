@@ -37,11 +37,11 @@ void createScene(Scene *scene)
     Vector red, blue, green, purple, white;
 
     /* lets collect a few colors */
-    setVector(&red,    1.0f, 0.0f, 0.0f);
-    setVector(&green,  0.0f, 1.0f, 0.0f);
-    setVector(&blue,   0.0f, 0.0f, 1.0f);
-    setVector(&purple, 1.0f, 0.0f, 1.0f);
-    setVector(&white,  1.0f, 1.0f, 1.0f);
+    setVector(&red,    0.9f, 0.4f, 0.2f);
+    setVector(&green,  0.1f, 0.4f, 0.2f);
+    setVector(&blue,   0.1f, 0.4f, 0.7f);
+    setVector(&purple, 0.5f, 0.1f, 0.3f);
+    setVector(&white,  0.5f, 0.5f, 0.5f);
 
     /* Create some materials */
     /* setMaterial(&mtl, color, kambient, kdiffuse, kspecular, shininess, refl, refr, ir) */
